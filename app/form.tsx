@@ -16,7 +16,6 @@ const Form = ({
         evt.preventDefault();
         const form = evt.currentTarget as HTMLFormElement;
         const url = form.elements.namedItem("url") as HTMLInputElement;
-        // console.log(url.value);
         transformUrl2Code(url.value);
       }}
     >

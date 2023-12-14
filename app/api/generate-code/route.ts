@@ -1,6 +1,3 @@
-// export async function GET(req: Request) { //Esta es la api mas sencilla que se puede hacer
-//   return new Response('Hello world!')
-// }
 
 // ./app/api/chat/route.js
 import { OpenAIStream, StreamingTextResponse } from "ai";
