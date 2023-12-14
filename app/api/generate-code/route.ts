@@ -38,7 +38,9 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { url } = await req.json(); // Esta url es la que estamos poniendo en el body de nuestra pagina
+  // tenemos que adaptar nuestra API para que reciba una imagen
+  const { url, imag } = await req.json(); // Esta url es la que estamos poniendo en el body de nuestra pagina
+  const imagUrl = url ?? imag;
 
   const response = await openai.chat.completions.create({
     model: "gpt-4-vision-preview",
@@ -58,7 +60,7 @@ export async function POST(req: Request) {
           },
           {
             type: "image_url",
-            image_url: url
+            image_url: imagUrl // Aqui le estamos pasando la imagen a openai
           }
         ]
       }
