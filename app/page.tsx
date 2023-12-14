@@ -1,24 +1,26 @@
-'use client';
+"use client";
 import Form from "./form";
 
 export default function Home() {
   const transformUrl2Code = async (url: string) => {
-    const res = fetch("/api/generate-code", {
+    const res = await fetch("/api/generate-code", {
       method: "POST",
       body: JSON.stringify({ url }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    if (!(await res).ok || !(await res).body == null) {
+
+    if (!res.ok || res.body == null) {
       throw new Error("Error al generar el codigo");
     }
-    const reader = (await res).body!.getReader();
+    const reader = res.body.getReader();
     const decoder = new TextDecoder("utf-8");
 
     while (true) {
-      const { done, value } = await reader.read();
-      const chunk = decoder.decode(value);
+      // Esto es para leer datos hasta que se termine de stremear
+      const { done, value } = await reader.read(); // cuando el reader nos diga que terminamos, romperemos el ciclo.
+      const chunk = decoder.decode(value); // es un troco de los datos que nos van llegando. Lo tenemos que decodificar.
       console.log(chunk);
       if (done) break;
 
