@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import MainMenu from "./main-menu";
 
 interface SidebarProps {
   showMenu: boolean;
@@ -10,7 +11,7 @@ interface SidebarProps {
 const Sidebar = ({ showMenu, onclose }: SidebarProps) => {
   return (
     <>
-    <aside
+      <aside
         className={cn(
           "fixed top-0 lg:left-0  border-r border-gray-500/30  w-[70vw] md:w-[30vw] lg:w-[20vw] xl:w-[20vw] h-full transition-all duration-300 ease-in-out z-50 bg-primary",
           showMenu ? "left-0" : "-left-full"
@@ -19,18 +20,14 @@ const Sidebar = ({ showMenu, onclose }: SidebarProps) => {
         <section className="p-8  border-b border-gray-500/30">
           <Link
             href="/"
-            className="text-2xl text-white hover:text-primary transition-colors duration-300"
+            className="text-2xl text-white hover:text-secondary transition-colors duration-300"
           >
-            hola
+            AI tools
           </Link>
-          <h3 className=" font-light text-gray-400"> holaaaaaaaaa</h3>
+          <h3 className=" font-light text-gray-400"> To make your life easier</h3>
         </section>
         <section>
-        <h1 className="text-3xl font-semibold">Image to Code</h1>
-          <h2 className="text-sm opacity-75">
-            Pasa tus images a codigo en segundos
-          </h2>
-          {/* <MainMenu /> */}
+          <MainMenu />
         </section>
       </aside>
 
