@@ -1,9 +1,16 @@
-import { routes } from "@/assets/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const MainMenu = () => {
+interface MainMenuProps {
+  routes: {
+    name: string;
+    path: string;
+    icon: React.ComponentType<{ size: number }>;
+  }[];
+}
+
+const MainMenu = ({ routes }: MainMenuProps) => {
   const pathName = usePathname();
 
   return (
@@ -21,7 +28,6 @@ const MainMenu = () => {
           >
             <route.icon size={18} />
             {route.name}
-            {/* <RiHome3Line size={18} />  Home //note Esto es para que se vea el icono */}
           </Link>
         ))}
       </li>

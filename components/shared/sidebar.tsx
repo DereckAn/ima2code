@@ -1,7 +1,9 @@
 "use client";
 
+import { routes } from "@/assets/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { RiUserLine } from "react-icons/ri";
 import MainMenu from "./main-menu";
 
 interface SidebarProps {
@@ -24,10 +26,22 @@ const Sidebar = ({ showMenu, onclose }: SidebarProps) => {
           >
             AI tools
           </Link>
-          <h3 className=" font-light text-gray-400"> To make your life easier</h3>
+          <h3 className=" font-light text-gray-400">
+            To make your life easier
+          </h3>
         </section>
-        <section>
-          <MainMenu />
+        <section className="flex flex-col justify-between ">
+          <MainMenu routes={routes} />
+
+          <MainMenu
+            routes={[
+              {
+                name: "Login",
+                path: "/login",
+                icon: RiUserLine,
+              },
+            ]}
+          />
         </section>
       </aside>
 

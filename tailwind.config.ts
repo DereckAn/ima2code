@@ -12,8 +12,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary:'#270a33',
-        secondary:'#77b1a9',
+        primary:'#003554',
+        secondary:'#0f4c5c',
         tertiary:'#3d7b80',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

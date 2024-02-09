@@ -1,8 +1,8 @@
 const ChatBot = () => {
   return (
-    <div>
+    <section>
       <h1>ChatBot</h1>
-    </div>
+    </section>
   );
 };
 
