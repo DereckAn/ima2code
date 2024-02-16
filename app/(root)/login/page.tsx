@@ -1,4 +1,6 @@
 "use client";
+import CreateUserForm from "@/components/ui/create-user-orm";
+import LoginForm from "@/components/ui/login-form";
 import { useState } from "react";
 
 const CreateUserPage = () => {
@@ -9,6 +11,13 @@ const CreateUserPage = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [apiData, setApiData] = useState(null);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
 
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,83 +31,76 @@ const CreateUserPage = () => {
       return;
     }
 
-    const response = await fetch("https://your-api-endpoint.com", {
+    fetch("http://127.0.0.1:8000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
-    });
+      body: JSON.stringify({
+        first_name: formData.fullname,
+        last_name: formData.lastname,
+        email: formData.email,
+        password: formData.password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const message = `An error has occured: ${response.status}`;
+          throw new Error(message);
+        }
+        // Handle successful response...
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-    if (response.ok) {
-      // Handle successful response
-    } else {
-      // Handle error
+  const handleFetchData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/users");
+      const data = await response.json();
+
+      // Aquí puedes procesar los datos recibidos (por ejemplo, mostrarlos en tu página).
+      console.log(data);
+
+      return {
+        props: {
+          userData: data, // Pasa los datos a tu componente
+        },
+      };
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+      return {
+        props: {
+          userData: null,
+        },
+      };
     }
   };
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen ">
-      <h1 className="mb-6 text-3xl font-bold text-gray-900">
-        Create User Page
+      <h1 className="mb-6 text-3xl font-bold">
+        {isLogin ? "Login Page" : "Create User Page"}
       </h1>
-      <form className="p-6 bg-white rounded shadow-md" onSubmit={handleSubmit}>
-        <InputField
-          label="Firstname"
-          type="text"
-          name="fullname"
-          onChange={handleChange}
-        />
-        <InputField
-          label="Lastname"
-          type="text"
-          name="lastname"
-          onChange={handleChange}
-        />
-        <InputField
-          label="Email"
-          type="email"
-          name="email"
-          onChange={handleChange}
-        />
-        <InputField
-          label="Password"
-          type="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <InputField
-          label="Confirm Password"
-          type="password"
-          name="confirmPassword"
-          onChange={handleChange}
-        />
-        <input
-          className="w-full px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
-          type="submit"
-          value="Submit"
-        />
-      </form>
+
+      {isLogin ? (
+        <LoginForm onChange={handleChange} />
+      ) : (
+        <CreateUserForm onChange={handleChange} />
+      )}
+
+      <button onClick={toggleForm} className="p-10">
+        {isLogin ? "Switch to Create User" : "Switch to Login"}
+      </button>
+
+      <button className="p-10" onClick={handleFetchData}>
+        Fetch Data
+      </button>
+      {apiData && <pre>{JSON.stringify(apiData, null, 2)}</pre>}
     </section>
   );
 };
 
-interface InputFieldProps {
-  label: string;
-  type: string;
-  name: string;
-  onChange: (e: any) => void;
-}
-
-const InputField = ({ label, type, name }: InputFieldProps) => (
-  <label className="block mb-4">
-    <span className="text-gray-700">{label}:</span>
-    <input
-      className="mt-1  w-full rounded-md border-gray-300 shadow-sm"
-      type={type}
-      name={name}
-    />
-  </label>
-);
 
 export default CreateUserPage;
