@@ -4,7 +4,6 @@ import LoginForm from "@/components/ui/login-form";
 import { useState } from "react";
 
 const CreateUserPage = () => {
-  const [apiData, setApiData] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
 
   const toggleForm = () => {
@@ -20,7 +19,7 @@ const CreateUserPage = () => {
 
       return {
         props: {
-          userData: data, 
+          userData: data,
         },
       };
     } catch (error) {
@@ -48,7 +47,6 @@ const CreateUserPage = () => {
       <button className="p-10" onClick={handleFetchData}>
         Fetch Data
       </button>
-      {apiData && <pre>{JSON.stringify(apiData, null, 2)}</pre>}
     </section>
   );
 };

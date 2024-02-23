@@ -5,9 +5,11 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    setSubmitted(true); 
     setError(null);
     let success = true;
     let errorText = "";
@@ -77,6 +79,7 @@ const LoginForm = () => {
         type="email"
         name="email"
         placeholder="email@email.com"
+        // error={submitted && !form.firstName} 
         onChange={(e) => setEmail(e.target.value)}
       />
       <InputField
@@ -84,6 +87,7 @@ const LoginForm = () => {
         type="password"
         name="password"
         placeholder="password"
+        // error={submitted && !form.firstName} 
         onChange={(e) => setPass(e.target.value)}
       />
       <input

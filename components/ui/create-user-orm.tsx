@@ -2,78 +2,88 @@ import { useState } from "react";
 import InputField from "./inputfiled-for-form";
 
 const CreateUserForm = () => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [form, setForm] = useState({
+    email: "",
+    pass: "",
+    passConfirm: "",
+    firstName: "",
+    lastName: "",
+    error: null as string | null,
+  });
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleChange = (e: any) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setError(null);
-    let success = true;
-    let errorText = "";
+    setSubmitted(true);
+    setForm({ ...form, error: null });
 
-    if (pass !== passConfirm) {
-      setError("Password and password confirmation do not match");
-      console.log("Password and password confirmation do not match");
+    if (
+      !form.email ||
+      !form.pass ||
+      !form.passConfirm ||
+      !form.firstName ||
+      !form.lastName
+    ) {
+      setForm({
+        ...form,
+        error: "All fields must be filled out",
+      });
+      return;
+    }
+
+    if (form.pass !== form.passConfirm) {
+      setForm({
+        ...form,
+        error: "Password and password confirmation do not match",
+      });
       return;
     }
 
     const payload = JSON.stringify({
-      first_name: firstName,
-      last_name: lastName,
-      email: email,
-      password: pass,
+      first_name: form.firstName,
+      last_name: form.lastName,
+      email: form.email,
+      password: form.pass,
     });
+
     try {
-      fetch("http://localhost:8000/users/", {
+      const res = await fetch("http://localhost:8000/users/", {
         method: "POST",
         body: payload,
         headers: {
           "Content-Type": "application/json",
         },
-      })
-        .then((res) => {
-          console.log(res);
-          if (!res.ok) {
-            errorText = "Error: " + res.status + " - ";
-            success = false;
-            return res.json();
-          } else {
-            success = true;
-            return res.json();
-          }
-        })
-        .then((data) => {
-          if (!success) {
-            for (const err in data.errors) {
-              for (const msg in data.errors[err])
-                errorText += data.errors[err][msg];
-            }
-            console.log(errorText);
-            setError(errorText);
-          }
-        })
-        .catch((error) => {
-          success = false;
-          console.error(error);
-        });
-      if (success) {
-        setEmail("");
-        setFirstName("");
-        setLastName("");
-        setPass("");
-        setError("Registered Successfully!");
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        const errorText = Object.values(data.errors).flat().join(" ");
+        setForm({ ...form, error: errorText });
       } else {
-        setError(errorText);
+        setForm({
+          email: "",
+          pass: "",
+          passConfirm: "",
+          firstName: "",
+          lastName: "",
+          error: "Registered Successfully!",
+        });
       }
     } catch (error) {
-      console.error(error);
-      setError("Error Registering - Check your information and try again");
+      setForm({
+        ...form,
+        error: "Error Registering - Check your information and try again",
+      });
     }
   };
+
   return (
     <form
       className="p-6 bg-secondary rounded-xl shadow-md "
@@ -82,37 +92,42 @@ const CreateUserForm = () => {
       <InputField
         label="Firstname"
         type="text"
-        name="fullname"
+        name="firstName"
         placeholder="Firstname"
-        onChange={(e) => setFirstName(e.target.value)}
+        error={submitted && !form.firstName} 
+        onChange={handleChange}
       />
       <InputField
         label="Lastname"
         type="text"
-        name="lastname"
+        name="lastName"
         placeholder="Lastname"
-        onChange={(e) => setLastName(e.target.value)}
+        onChange={handleChange}
+        error={submitted && !form.firstName} 
       />
       <InputField
         label="Email"
         type="email"
         name="email"
         placeholder="email@email.com"
-        onChange={(e) => setEmail(e.target.value)}
+        error={submitted && !form.firstName} 
+        onChange={handleChange}
       />
       <InputField
         label="Password"
         type="password"
-        name="password"
+        name="pass"
         placeholder="Password"
-        onChange={(e) => setPass(e.target.value)}
+        error={submitted && !form.firstName} 
+        onChange={handleChange}
       />
       <InputField
         label="Confirm Password"
         type="password"
-        name="confirmPassword"
+        name="passConfirm"
         placeholder="Confirm Password"
-        onChange={(e) => setPassConfirm(e.target.value)}
+        error={submitted && !form.firstName} 
+        onChange={handleChange}
       />
       <input
         className="w-full px-3 py-2 text-white bg-tertiary  rounded hover:bg-blue-700"
