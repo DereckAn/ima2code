@@ -2,11 +2,11 @@
 import { Dropzone, ExtFile, FileMosaic } from "@files-ui/react";
 import { useState } from "react";
 
-interface DragAndDropProps {
+interface AiPDFProps {
   pdf: (file: File) => Promise<void>;
 }
 
-export const PdfDragDrop = ({ pdf }: DragAndDropProps) => {
+export const AiPDF = ({ pdf }: AiPDFProps) => {
   const [files, setFiles] = useState<ExtFile[]>([]);
   const updateFiles = (files: ExtFile[]) => {
     const file = files[0].file;
@@ -18,9 +18,9 @@ export const PdfDragDrop = ({ pdf }: DragAndDropProps) => {
   };
   return (
     <Dropzone
-      accept="application/pdf"
+      accept="image/*"
       label="Drag and Drop you IMAGES"
-    //   onDrop={console.log}
+      onDrop={console.log}
       onChange={updateFiles}
       header={false}
       footer={false}
