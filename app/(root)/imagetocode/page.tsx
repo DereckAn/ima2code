@@ -77,7 +77,7 @@ export default function ImageToCode() {
     await transform2Code(JSON.stringify({ url }));
   };
   return (
-    <main className="">
+    <main className="h-screen flex justify-center items-center">
       <section className="max-w-5xl w-full mx-auto p-10 ">
         {/* // note Esto es para que se muestre el loading */}
         {step === STEPS.LOADING && (
@@ -106,7 +106,7 @@ export default function ImageToCode() {
 
         {/* // note Esto es para que se muestre el formulario */}
         {step === STEPS.INITIAL && (
-          <div className="flex flex-col gap-4 ">
+          <div className="flex flex-col gap-4">
             <DragAndDrop transformImage2Code={transformImage2Code} />
             <Form transformUrl2Code={transformUrl2Code} />
           </div>
