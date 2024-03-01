@@ -12,7 +12,9 @@ const CreateUserPage = () => {
 
   const handleFetchData = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL_BASE + "/users/");
+      const response = await fetch(
+        process.env.REACT_APP_API_URL_BASE + "/users/"
+      );
       const data = await response.json();
 
       console.log(data);
@@ -34,7 +36,7 @@ const CreateUserPage = () => {
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen ">
-      <h1 className="mb-6 text-3xl font-bold">
+      <h1 className="mb-6 text-5xl font-bold">
         {isLogin ? "Login Page" : "Create User Page"}
       </h1>
 
