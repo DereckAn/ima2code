@@ -19,9 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       {/* // note "dark" es una clase de tailwindcss que se encarga de cambiar el color de fondo */}
       <body className={cn("dark text-gray-300", inter.className)}>
-        <main className="lg:pl-[23vw] xl:pl-[21vw]  px-5 xl:-px-0  ">
-          {children}
-        </main>
+        <main className="ml-[100px] px-5 xl:-px-0 ">{children}</main>
       </body>
     </html>
   );

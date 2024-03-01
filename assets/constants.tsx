@@ -1,10 +1,7 @@
 import {
-  RiBriefcase2Line,
-  RiEdit2Line,
   RiHome3Line,
-  RiMegaphoneLine,
-  RiUserLine,
 } from "react-icons/ri";
+import { BsChatTextFill, BsCameraVideo, BsFillFileEarmarkPdfFill, BsImages  } from "react-icons/bs";
 
 export const routes = [
   {
@@ -15,21 +12,21 @@ export const routes = [
   {
     name: "Image To Code",
     path: "/imagetocode",
-    icon: RiBriefcase2Line,
+    icon: BsImages ,
   },
   {
     name: "Chat",
     path: "/chatbot",
-    icon: RiUserLine,
+    icon: BsChatTextFill,
   },
   {
     name: "Ask PDF",
     path: "/PDFai",
-    icon: RiEdit2Line,
+    icon: BsFillFileEarmarkPdfFill,
   },
   {
     name: "Friends",
     path: "/usefulfriend",
-    icon: RiMegaphoneLine,
+    icon: BsCameraVideo,
   },
 ];

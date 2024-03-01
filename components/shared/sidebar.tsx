@@ -15,7 +15,7 @@ const Sidebar = ({ showMenu, onclose }: SidebarProps) => {
     <>
       <aside
         className={cn(
-          "fixed top-0 lg:left-0  border-r border-gray-500/30  w-[70vw] md:w-[30vw] lg:w-[20vw] xl:w-[20vw] h-full transition-all duration-300 ease-in-out z-50 bg-primary",
+          "fixed top-0 lg:left-0  border-r border-gray-500/30  w-[100px] h-full transition-all duration-300 ease-in-out z-50 bg-primary",
           showMenu ? "left-0" : "-left-full"
         )}
       >
@@ -24,11 +24,8 @@ const Sidebar = ({ showMenu, onclose }: SidebarProps) => {
             href="/"
             className="text-2xl text-white hover:text-secondary transition-colors duration-300"
           >
-            AI tools
+            AI
           </Link>
-          <h3 className=" font-light text-gray-400">
-            To make your life easier
-          </h3>
         </section>
         <section className="flex flex-col justify-between ">
           <MainMenu routes={routes} />

@@ -12,7 +12,7 @@ const CreateUserPage = () => {
 
   const handleFetchData = async () => {
     try {
-      const response = await fetch("http://localhost:8000/users/");
+      const response = await fetch(process.env.REACT_APP_API_URL_BASE + "/users/");
       const data = await response.json();
 
       console.log(data);
