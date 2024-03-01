@@ -3,8 +3,5 @@ os: linux
 files:
   - source: .next/
     destination: /var/www/html/
-hooks:
-  ApplicationStart:
-    - location: scripts/install_dependencies.sh
-      timeout: 300
+    
 file_exists_behavior: OVERWRITE

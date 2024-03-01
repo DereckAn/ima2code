@@ -26,7 +26,7 @@ const MainMenu = ({ routes }: MainMenuProps) => {
                 "text-secondary border-primary border-2"
             )}
           >
-            <route.icon size={18} />
+            <route.icon size={24} />
             {route.name}
           </Link>
         ))}
