@@ -1,11 +1,3 @@
 {
-  "/_not-found": "app/_not-found.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/(root)/PDFai/page": "app/(root)/PDFai/page.js",
-  "/(root)/imagetocode/page": "app/(root)/imagetocode/page.js",
-  "/(root)/login/page": "app/(root)/login/page.js",
-  "/(root)/page": "app/(root)/page.js",
-  "/(root)/usefulfriend/page": "app/(root)/usefulfriend/page.js",
-  "/(root)/chatbot/page": "app/(root)/chatbot/page.js",
-  "/api/generate-code/route": "app/api/generate-code/route.js"
+  "/(root)/login/page": "app/(root)/login/page.js"
 }

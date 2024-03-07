@@ -1,27 +1,6 @@
 {
   "sortedMiddleware": [],
   "middleware": {},
-  "functions": {
-    "/api/generate-code/route": {
-      "files": [
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "prerender-manifest.js",
-        "server/edge-runtime-webpack.js",
-        "server/app/api/generate-code/route.js"
-      ],
-      "name": "app/api/generate-code/route",
-      "page": "/api/generate-code/route",
-      "matchers": [
-        {
-          "regexp": "^/api/generate\\-code$",
-          "originalSource": "/api/generate-code"
-        }
-      ],
-      "wasm": [],
-      "assets": []
-    }
-  },
+  "functions": {},
   "version": 2
 }

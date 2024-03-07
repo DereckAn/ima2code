@@ -18,7 +18,7 @@ const LoginForm = () => {
       password: pass,
     });
     try {
-      fetch("http://localhost:8000/login/", {
+      fetch(process.env.NEXT_PUBLIC_REACT_APP_API_URL_BASE + "/login/", {
         method: "POST",
         body: payload,
         headers: {
