@@ -11,7 +11,6 @@ type User = {
 
 const UserTable = () => {
   const [userData, setUserData] = useState<User[] | null>(null);
-  const [isServer, setIsServer] = useState(true);
 
   const handleFetchData = async () => {
     try {

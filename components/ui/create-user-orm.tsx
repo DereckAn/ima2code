@@ -1,7 +1,10 @@
 import { useState } from "react";
 import InputField from "./inputfiled-for-form";
+interface CreateUserFormProps {
+  setLoggedInUser: (user: string) => void;
+}
 
-const CreateUserForm = () => {
+const CreateUserForm = ({ setLoggedInUser }: CreateUserFormProps) => {
   const [form, setForm] = useState({
     email: "",
     pass: "",
@@ -10,7 +13,6 @@ const CreateUserForm = () => {
     lastName: "",
     error: null as string | null,
   });
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: any) => {
     setForm({
@@ -20,10 +22,6 @@ const CreateUserForm = () => {
   };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setForm({ ...form, error: null });
-
     if (
       !form.email ||
       !form.pass ||
@@ -35,14 +33,12 @@ const CreateUserForm = () => {
         ...form,
         error: "All fields must be filled out",
       });
+      alert("All fields must be filled out");
       return;
     }
 
     if (form.pass !== form.passConfirm) {
-      setForm({
-        ...form,
-        error: "Password and password confirmation do not match",
-      });
+      alert("Password and password confirmation do not match");
       return;
     }
 
@@ -54,18 +50,20 @@ const CreateUserForm = () => {
     });
 
     try {
-      const res = await fetch("http://localhost:8000/users/", {
-        method: "POST",
-        body: payload,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_REACT_APP_API_URL_BASE + "/users/",
+        {
+          method: "POST",
+          body: payload,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!res.ok) {
         const data = await res.json();
-        const errorText = Object.values(data.errors).flat().join(" ");
-        setForm({ ...form, error: errorText });
+        alert("Error: " + data.message);
       } else {
         setForm({
           email: "",
@@ -73,14 +71,12 @@ const CreateUserForm = () => {
           passConfirm: "",
           firstName: "",
           lastName: "",
-          error: "Registered Successfully!",
+          error: "User created successfully!",
         });
+        alert("User created successfully!");
       }
     } catch (error) {
-      setForm({
-        ...form,
-        error: "Error Registering - Check your information and try again",
-      });
+      alert("Error Registering - Check your information and try again");
     }
   };
 
@@ -94,7 +90,7 @@ const CreateUserForm = () => {
         type="text"
         name="firstName"
         placeholder="Firstname"
-        error={submitted && !form.firstName} 
+        error={!form.firstName}
         onChange={handleChange}
       />
       <InputField
@@ -103,14 +99,14 @@ const CreateUserForm = () => {
         name="lastName"
         placeholder="Lastname"
         onChange={handleChange}
-        error={submitted && !form.firstName} 
+        error={!form.lastName}
       />
       <InputField
         label="Email"
         type="email"
         name="email"
         placeholder="email@email.com"
-        error={submitted && !form.firstName} 
+        error={!form.email}
         onChange={handleChange}
       />
       <InputField
@@ -118,7 +114,7 @@ const CreateUserForm = () => {
         type="password"
         name="pass"
         placeholder="Password"
-        error={submitted && !form.firstName} 
+        error={!form.pass || form.pass !== form.passConfirm}
         onChange={handleChange}
       />
       <InputField
@@ -126,7 +122,7 @@ const CreateUserForm = () => {
         type="password"
         name="passConfirm"
         placeholder="Confirm Password"
-        error={submitted && !form.firstName} 
+        error={!form.passConfirm || form.pass !== form.passConfirm}
         onChange={handleChange}
       />
       <input

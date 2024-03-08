@@ -12,7 +12,7 @@ const InputField = ({ label, type, name, placeholder, onChange, error }: InputFi
     <label className="block mb-4">
       <span className="text-white">{label}:</span>
       <input
-        className={`mt-1 w-full rounded-md shadow-sm ${error ? 'border-red-500' : 'border-gray-300'}`}
+        className={`text-black mt-1 w-full rounded-md shadow-sm ${error ? 'border-red-500 bg-red-200' : 'border-gray-300'}`}
         type={type}
         name={name}
         placeholder={placeholder}

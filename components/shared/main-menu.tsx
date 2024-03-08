@@ -22,8 +22,7 @@ const MainMenu = ({ routes }: MainMenuProps) => {
             href={route.path}
             className={cn(
               "flex flex-col items-center text-xs truncate gap-4 text-gray-300 p-5 px-8 border-b border-gray-500/30 hover:bg-gray-500/10 hover:text-secondary transition-colors duration-300 cursor-pointer",
-              pathName === route.path &&
-                "text-secondary border-primary border-2"
+              pathName === route.path && "text-fourth border-fourth border-2"
             )}
           >
             <route.icon size={24} />

@@ -1,7 +1,11 @@
+import { RiHome3Line } from "react-icons/ri";
 import {
-  RiHome3Line,
-} from "react-icons/ri";
-import { BsChatTextFill, BsCameraVideo, BsFillFileEarmarkPdfFill, BsImages  } from "react-icons/bs";
+  BsChatTextFill,
+  BsCameraVideo,
+  BsFillFileEarmarkPdfFill,
+  BsImages,
+} from "react-icons/bs";
+import { MdOutlinePersonSearch } from "react-icons/md";
 
 export const routes = [
   {
@@ -12,7 +16,7 @@ export const routes = [
   {
     name: "Image To Code",
     path: "/imagetocode",
-    icon: BsImages ,
+    icon: BsImages,
   },
   {
     name: "Chat",
@@ -28,5 +32,10 @@ export const routes = [
     name: "Friends",
     path: "/usefulfriend",
     icon: BsCameraVideo,
+  },
+  {
+    name: "Specific ",
+    path: "/user",
+    icon: MdOutlinePersonSearch,
   },
 ];
