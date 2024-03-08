@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 
 type User = {
@@ -10,6 +11,7 @@ type User = {
 
 const UserTable = () => {
   const [userData, setUserData] = useState<User[] | null>(null);
+  const [isServer, setIsServer] = useState(true);
 
   const handleFetchData = async () => {
     try {
@@ -28,24 +30,42 @@ const UserTable = () => {
   }, []);
 
   return (
-    <table>
-      <thead>
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-secondary">
         <tr>
-          <th>User ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Password</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+            User ID
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+            First Name
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+            Last Name
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+            Email
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+            Password
+          </th>
         </tr>
       </thead>
-      <tbody>
-        {userData?.map((user, index) => (
+      <tbody className="bg-tertiary divide-y divide-gray-200">
+        {userData?.map((user) => (
           <tr key={user?.user_id}>
-            <td>{user?.user_id}</td>
-            <td>{user?.first_name}</td>
-            <td>{user?.last_name}</td>
-            <td>{user?.email}</td>
-            <td>{user?.password}</td>
+            <td className="px-6 whitespace-nowrap">
+              {user?.user_id || "-----"}
+            </td>
+            <td className="px-6 whitespace-nowrap">
+              {user?.first_name || "-----"}
+            </td>
+            <td className="px-6 whitespace-nowrap">
+              {user?.last_name || "-----"}
+            </td>
+            <td className="px-6 whitespace-nowrap">{user?.email || "-----"}</td>
+            <td className="px-6 whitespace-nowrap">
+              {user?.password || "-----"}
+            </td>
           </tr>
         ))}
       </tbody>

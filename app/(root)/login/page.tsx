@@ -10,28 +10,6 @@ const CreateUserPage = () => {
     setIsLogin(!isLogin);
   };
 
-  const handleFetchData = async () => {
-    try {
-      const response = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_URL_BASE + "/users/");
-      const data = await response.json();
-
-      console.log(data);
-
-      return {
-        props: {
-          userData: data,
-        },
-      };
-    } catch (error) {
-      console.error("Error al obtener los datos:", error);
-      return {
-        props: {
-          userData: null,
-        },
-      };
-    }
-  };
-
   return (
     <section className="flex flex-col items-center justify-center min-h-screen ">
       <h1 className="mb-6 text-5xl font-bold">
@@ -42,10 +20,6 @@ const CreateUserPage = () => {
 
       <button onClick={toggleForm} className="p-10">
         {isLogin ? "Switch to Create User" : "Switch to Login"}
-      </button>
-
-      <button className="p-10" onClick={handleFetchData}>
-        Fetch Data
       </button>
     </section>
   );

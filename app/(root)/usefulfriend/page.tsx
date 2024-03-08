@@ -1,9 +1,12 @@
+import UserTable from "@/components/ui/user-table";
+
 const UsefulFriend = () => {
-    return ( 
-        <div>
-            <h1>Useful Friend</h1>
-        </div>
-     );
-}
- 
+  // const [isServer, setIsServer] = useState(true)
+  return (
+    <div className="flex items-center justify-center h-screen w-full">
+      <UserTable />
+    </div>
+  );
+};
+
 export default UsefulFriend;
