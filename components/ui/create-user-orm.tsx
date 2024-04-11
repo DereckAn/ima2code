@@ -74,6 +74,7 @@ const CreateUserForm = ({ setLoggedInUser }: CreateUserFormProps) => {
           error: "User created successfully!",
         });
         alert("User created successfully!");
+        setLoggedInUser(form.firstName);
       }
     } catch (error) {
       alert("Error Registering - Check your information and try again");
