@@ -17,6 +17,9 @@ module.exports = {
         tertiary:'#3d7b80',
         fourth: '#ff6663'
       },
+      fontFamily:{
+        'mono': ['"Fira Code"','monospace']
+      }
     },
   },
   plugins: [require("tailwindcss-animate"), require("flowbite/plugin")],

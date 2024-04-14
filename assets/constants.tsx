@@ -1,11 +1,11 @@
-import { RiHome3Line } from "react-icons/ri";
 import {
-  BsChatTextFill,
   BsCameraVideo,
+  BsChatTextFill,
   BsFillFileEarmarkPdfFill,
   BsImages,
 } from "react-icons/bs";
 import { MdOutlinePersonSearch } from "react-icons/md";
+import { RiGamepadLine, RiHome3Line } from "react-icons/ri";
 
 export const routes = [
   {
@@ -22,6 +22,11 @@ export const routes = [
     name: "Chat",
     path: "/chatbot",
     icon: BsChatTextFill,
+  },
+  {
+    name: "Game 🕹️",
+    path: "/game",
+    icon: RiGamepadLine,
   },
   {
     name: "Ask PDF",
