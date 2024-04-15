@@ -7,4 +7,30 @@ body,
 :root {
 	height: 100%;
 	background-color: rgb(36, 39, 39);
+	scrollbar-width: none;
+	scrollbar-color: transparent transparent;
+}
+
+#letter {
+	/* Tus estilos aquí */
+	position: relative;
+}
+
+#letter.active::before {
+	content: '|';
+	font-size: 14px;
+	position: absolute;
+	left: -55%;
+	animation: 1s blink infinite linear;
+}
+
+@keyframes blink {
+	0%,
+	49% {
+		visibility: visible;
+	}
+	50%,
+	100% {
+		visibility: hidden;
+	}
 }
